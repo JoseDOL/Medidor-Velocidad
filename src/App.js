@@ -30,14 +30,19 @@ function App() {
 
   const medirSubida = async () => {
     const start = performance.now();
-    const data = new Blob([new ArrayBuffer(1 * 1024 * 1024)]); // Reducido a 1 MB
+    const data = new Blob([new ArrayBuffer(1 * 1024 * 1024)]);
     await fetch('https://backend-speed-test.onrender.com/speed/upload', {
       method: 'POST',
       body: data,
+      headers: {
+        'Content-Type': 'application/octet-stream',
+        'Connection': 'keep-alive', // Ayuda en algunos casos
+      },
+      // Forzar HTTP/1.1 si es necesario (esto depende del navegador y servidor)
     });
     const end = performance.now();
     const tiempoSegundos = (end - start) / 1000;
-    const tamanoMB = 1; // Ajustado a 1 MB
+    const tamanoMB = 1;
     const velocidadMbps = (tamanoMB * 8) / tiempoSegundos;
     setUploadSpeed(velocidadMbps.toFixed(2));
   };
