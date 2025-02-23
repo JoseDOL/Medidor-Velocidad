@@ -1,0 +1,177 @@
+/* Resetear márgenes y definir altura completa para html y body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Variables de color para los temas */
+  :root {
+    --dark-bg: #1a1a1a;
+    --dark-text: #ffffff;
+    --light-bg: #ffffff;
+    --light-text: #333333;
+  }
+  
+  /* Aplicar el tema a toda la pantalla */
+  .app {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Tema oscuro */
+  .app.dark {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+  }
+  
+  .app.dark .theme-toggle {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+  }
+  
+  /* Tema claro */
+  .app.light {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+  }
+  
+  .app.light .theme-toggle {
+    background-color: #555555;
+    border: 1px solid #333333;
+  }
+  
+  /* Estilos para el header */
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+  }
+  
+  /* Centrar el título */
+  header h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  /* Posicionar y estilizar el botón de tema */
+  .theme-toggle {
+    position: absolute;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Animación al hacer clic en el botón de tema */
+  .theme-toggle:active {
+    transform: scale(0.9);
+  }
+  
+  /* Estilos para el main */
+  main {
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  /* Estilos para el botón de iniciar prueba */
+  .start-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #81c784;
+    border: 3px solid #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    animation: pulse 1.5s infinite;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Estado cuando está ejecutando la prueba */
+  .start-button.testing {
+    background-color: #e57373;
+    border: 3px solid #e57373;
+    animation: none;
+    cursor: not-allowed;
+  }
+  
+  /* Animación de parpadeo */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+  }
+  
+  /* Deshabilitado (redundante aquí, pero mantenido por compatibilidad) */
+  .start-button:disabled {
+    background-color: #e57373;
+    border: 3px solid #e57373;
+    cursor: not-allowed;
+  }
+  
+  /* Estilos para los resultados */
+  .results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Contenedor para los velocímetros */
+  .speed-meters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  /* Estilos para cada velocímetro */
+  .speed-meters div {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+  
+  /* Estilos para los valores debajo de los velocímetros */
+  .speed-meters div p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Estilos para la latencia */
+  .latency {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para el footer */
+  footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    border-top: 1px solid #555;
+  }
