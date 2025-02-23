@@ -12,14 +12,14 @@ function App() {
 
   const medirLatencia = async () => {
     const start = performance.now();
-    await fetch('http://localhost:5000/speed/ping');
+    await fetch('https://backend-speed-test.onrender.com/speed/ping');
     const end = performance.now();
     setLatency(((end - start) / 2).toFixed(2));
   };
 
   const medirDescarga = async () => {
     const start = performance.now();
-    const response = await fetch('http://localhost:5000/speed/download');
+    const response = await fetch('https://backend-speed-test.onrender.com/speed/download');
     await response.blob();
     const end = performance.now();
     const tiempoSegundos = (end - start) / 1000;
@@ -31,7 +31,7 @@ function App() {
   const medirSubida = async () => {
     const start = performance.now();
     const data = new Blob([new ArrayBuffer(10 * 1024 * 1024)]);
-    await fetch('http://localhost:5000/speed/upload', {
+    await fetch('https://backend-speed-test.onrender.com/speed/upload', {
       method: 'POST',
       body: data,
     });
