@@ -60,7 +60,11 @@ function App() {
         <ThemeToggle theme={theme} setTheme={setTheme} />
       </header>
       <main>
-        <button onClick={iniciarPruebas} disabled={testing}>
+        <button
+          className={`start-button ${testing ? 'testing' : ''}`}
+          onClick={iniciarPruebas}
+          disabled={testing}
+        >
           {testing ? 'Probando...' : 'Iniciar Prueba'}
         </button>
         <div className="results">
@@ -83,8 +87,7 @@ function App() {
         </div>
       </main>
       <footer>
-        <p>JDOL Software © 2025</p>
-        <p>Desarrollado con asistencia de IA</p>
+        <p>JDOL Software © 2025 | Desarrollado con asistencia de IA</p>
       </footer>
     </div>
   );

@@ -28,10 +28,20 @@ html, body {
     color: var(--dark-text);
   }
   
+  .app.dark .theme-toggle {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+  }
+  
   /* Tema claro */
   .app.light {
     background-color: var(--light-bg);
     color: var(--light-text);
+  }
+  
+  .app.light .theme-toggle {
+    background-color: #555555;
+    border: 1px solid #333333;
   }
   
   /* Estilos para el header */
@@ -50,11 +60,25 @@ html, body {
     text-align: center;
   }
   
-  /* Posicionar el botón de tema en la esquina derecha */
+  /* Posicionar y estilizar el botón de tema */
   .theme-toggle {
     position: absolute;
     right: 20px;
-    background-color: #555;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Animación al hacer clic en el botón de tema */
+  .theme-toggle:active {
+    transform: scale(0.9);
   }
   
   /* Estilos para el main */
@@ -64,19 +88,44 @@ html, body {
     flex-grow: 1;
   }
   
-  /* Estilos para los botones */
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
+  /* Estilos para el botón de iniciar prueba */
+  .start-button {
+    width: 120px; /* Tamaño fijo para hacerlo redondo */
+    height: 120px;
+    border-radius: 50%; /* Forma redonda */
+    background-color: #007bff; /* Azul original */
     color: white;
     border: none;
-    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    animation: pulse 1.5s infinite; /* Animación de parpadeo constante */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
   }
   
-  button:disabled {
-    background-color: #cccccc;
+  /* Estado cuando está ejecutando la prueba */
+  .start-button.testing {
+    background-color: #e57373; /* Rojo suave */
+    animation: none; /* Detiene la animación de parpadeo */
+    cursor: not-allowed;
+  }
+  
+  /* Animación de parpadeo */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+  }
+  
+  /* Deshabilitado (redundante aquí, pero mantenido por compatibilidad) */
+  .start-button:disabled {
+    background-color: #e57373; /* Coincide con el estado testing */
     cursor: not-allowed;
   }
   
@@ -115,10 +164,4 @@ html, body {
     padding: 10px;
     font-size: 0.9rem;
     border-top: 1px solid #555;
-  }
-
-  footer p::after {
-    content: ;
-    font-size: 0.8rem;
-    opacity: 0.8;
   }
