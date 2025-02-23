@@ -64,22 +64,28 @@ function App() {
           {testing ? 'Probando...' : 'Iniciar Prueba'}
         </button>
         <div className="results">
-          <div>
+          <div className="speed-meters">
+            <div>
+              <h3>Descarga</h3>
+              <Speedometer speed={downloadSpeed} theme={theme} />
+              <p>{downloadSpeed} Mbps</p>
+            </div>
+            <div>
+              <h3>Subida</h3>
+              <Speedometer speed={uploadSpeed} theme={theme} />
+              <p>{uploadSpeed} Mbps</p>
+            </div>
+          </div>
+          <div className="latency">
             <h3>Latencia</h3>
             <p>{latency} ms</p>
           </div>
-          <div>
-            <h3>Descarga</h3>
-            <Speedometer speed={downloadSpeed} theme={theme} />
-            <p>{downloadSpeed} Mbps</p>
-          </div>
-          <div>
-            <h3>Subida</h3>
-            <Speedometer speed={uploadSpeed} theme={theme} />
-            <p>{uploadSpeed} Mbps</p>
-          </div>
         </div>
       </main>
+      <footer>
+        <p>JDOL Software © 2025</p>
+        <p>Desarrollado con asistencia de IA</p>
+      </footer>
     </div>
   );
 }

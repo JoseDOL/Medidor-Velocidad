@@ -16,7 +16,7 @@ html, body {
   
   /* Aplicar el tema a toda la pantalla */
   .app {
-    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -37,16 +37,31 @@ html, body {
   /* Estilos para el header */
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px;
+    position: relative;
+  }
+  
+  /* Centrar el título */
+  header h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  /* Posicionar el botón de tema en la esquina derecha */
+  .theme-toggle {
+    position: absolute;
+    right: 20px;
+    background-color: #555;
   }
   
   /* Estilos para el main */
   main {
     text-align: center;
     padding: 20px;
-    flex-grow: 1; /* Permite que main ocupe el espacio restante */
+    flex-grow: 1;
   }
   
   /* Estilos para los botones */
@@ -65,17 +80,45 @@ html, body {
     cursor: not-allowed;
   }
   
-  .theme-toggle {
-    background-color: #555;
-  }
-  
   /* Estilos para los resultados */
   .results {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
   }
   
-  .results div {
-    flex: 1;
+  /* Contenedor para los velocímetros */
+  .speed-meters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  /* Estilos para cada velocímetro */
+  .speed-meters div {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+  
+  /* Estilos para la latencia */
+  .latency {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para el footer */
+  footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    border-top: 1px solid #555;
+  }
+
+  footer p::after {
+    content: ;
+    font-size: 0.8rem;
+    opacity: 0.8;
   }
