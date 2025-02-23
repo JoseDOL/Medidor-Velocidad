@@ -1,0 +1,81 @@
+/* Resetear márgenes y definir altura completa para html y body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Variables de color para los temas */
+  :root {
+    --dark-bg: #1a1a1a;
+    --dark-text: #ffffff;
+    --light-bg: #ffffff;
+    --light-text: #333333;
+  }
+  
+  /* Aplicar el tema a toda la pantalla */
+  .app {
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Tema oscuro */
+  .app.dark {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+  }
+  
+  /* Tema claro */
+  .app.light {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+  }
+  
+  /* Estilos para el header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Estilos para el main */
+  main {
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1; /* Permite que main ocupe el espacio restante */
+  }
+  
+  /* Estilos para los botones */
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .theme-toggle {
+    background-color: #555;
+  }
+  
+  /* Estilos para los resultados */
+  .results {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .results div {
+    flex: 1;
+  }
