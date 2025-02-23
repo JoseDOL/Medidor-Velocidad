@@ -65,7 +65,7 @@ function App() {
           onClick={iniciarPruebas}
           disabled={testing}
         >
-          {testing ? 'Probando...' : 'Iniciar Prueba'}
+          {testing ? 'Probando...' : 'Iniciar'}
         </button>
         <div className="results">
           <div className="speed-meters">

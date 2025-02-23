@@ -4,6 +4,7 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    font-family: 'Open Sans', sans-serif; /* Fuente por defecto (cambia a 'Blogger Sans' si tienes el CDN) */
   }
   
   /* Variables de color para los temas */
@@ -90,23 +91,25 @@ html, body {
   
   /* Estilos para el botón de iniciar prueba */
   .start-button {
-    width: 120px; /* Tamaño fijo para hacerlo redondo */
+    width: 120px;
     height: 120px;
-    border-radius: 50%; /* Forma redonda */
-    background-color: #007bff; /* Azul original */
+    border-radius: 50%;
+    background-color: #81c784; /* Verde suave */
+    border: 3px solid #007bff; /* Contorno azul */
     color: white;
-    border: none;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold; /* Negrita para 'Iniciar' y 'Probando...' */
     text-align: center;
-    animation: pulse 1.5s infinite; /* Animación de parpadeo constante */
-    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    animation: pulse 1.5s infinite;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   
   /* Estado cuando está ejecutando la prueba */
   .start-button.testing {
     background-color: #e57373; /* Rojo suave */
-    animation: none; /* Detiene la animación de parpadeo */
+    border: 3px solid #e57373; /* Contorno coincide con el fondo */
+    animation: none;
     cursor: not-allowed;
   }
   
@@ -125,7 +128,8 @@ html, body {
   
   /* Deshabilitado (redundante aquí, pero mantenido por compatibilidad) */
   .start-button:disabled {
-    background-color: #e57373; /* Coincide con el estado testing */
+    background-color: #e57373;
+    border: 3px solid #e57373;
     cursor: not-allowed;
   }
   
