@@ -3,21 +3,22 @@ import GaugeChart from 'react-gauge-chart';
 
 const Speedometer = ({ speed, theme }) => {
   const needleColor = theme === 'dark' ? '#ffffff' : '#333333';
+  const progressColor = theme === 'dark' ? '#4caf50' : '#2196f3'; // Verde oscuro, azul claro
 
   return (
     <GaugeChart
       id={`gauge-${speed}`}
-      nrOfLevels={10}
-      arcWidth={0.4}
-      percent={speed / 100}
+      nrOfLevels={1} // Solo un nivel para simular barra de carga
+      arcWidth={0.4} // Arco grueso
+      percent={speed / 100} // Progreso de 0 a 100%
       textColor={theme === 'dark' ? '#ffffff' : '#333333'}
       needleColor={needleColor}
       needleBaseColor={needleColor}
-      colors={['#2196f3', '#ffeb3b', '#4caf50']}
-      arcPadding={0.02}
-      cornerRadius={3}
-      style={{ width: '300px' }}
-      hideText={true} // Oculta cualquier texto interno del velocímetro
+      colors={[progressColor, '#e0e0e0']} // Color de progreso y fondo gris
+      arcPadding={0} // Sin espacio entre segmentos
+      cornerRadius={0} // Sin redondeo para un look continuo
+      style={{ width: '300px' }} // Tamaño fijo
+      hideText={true} // Oculta texto interno (lo mostramos en App.js)
     />
   );
 };

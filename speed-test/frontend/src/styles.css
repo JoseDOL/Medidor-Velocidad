@@ -159,8 +159,8 @@ html, body {
   
   /* Estilos para los valores debajo de los velocímetros */
   .speed-meters div p {
-    margin-top: 10px; /* Espacio entre el velocímetro y el número */
-    font-size: 1.2rem; /* Tamaño legible */
+    margin-top: 10px;
+    font-size: 1.2rem;
   }
   
   /* Estilos para la latencia */
