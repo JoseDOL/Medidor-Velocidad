@@ -4,7 +4,7 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: 'Open Sans', sans-serif; /* Fuente por defecto (cambia a 'Blogger Sans' si tienes el CDN) */
+    font-family: 'Open Sans', sans-serif;
   }
   
   /* Variables de color para los temas */
@@ -94,12 +94,12 @@ html, body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: #81c784; /* Verde suave */
-    border: 3px solid #007bff; /* Contorno azul */
+    background-color: #81c784;
+    border: 3px solid #007bff;
     color: white;
     cursor: pointer;
     font-size: 16px;
-    font-weight: bold; /* Negrita para 'Iniciar' y 'Probando...' */
+    font-weight: bold;
     text-align: center;
     animation: pulse 1.5s infinite;
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -107,8 +107,8 @@ html, body {
   
   /* Estado cuando está ejecutando la prueba */
   .start-button.testing {
-    background-color: #e57373; /* Rojo suave */
-    border: 3px solid #e57373; /* Contorno coincide con el fondo */
+    background-color: #e57373;
+    border: 3px solid #e57373;
     animation: none;
     cursor: not-allowed;
   }
@@ -146,15 +146,21 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
   }
   
   /* Estilos para cada velocímetro */
   .speed-meters div {
     flex: 0 1 auto;
     text-align: center;
+  }
+  
+  /* Estilos para los valores debajo de los velocímetros */
+  .speed-meters div p {
+    margin-top: 10px; /* Espacio entre el velocímetro y el número */
+    font-size: 1.2rem; /* Tamaño legible */
   }
   
   /* Estilos para la latencia */

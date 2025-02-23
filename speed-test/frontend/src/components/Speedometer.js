@@ -2,18 +2,22 @@ import React from 'react';
 import GaugeChart from 'react-gauge-chart';
 
 const Speedometer = ({ speed, theme }) => {
-  // Definir el color de la aguja según el tema
   const needleColor = theme === 'dark' ? '#ffffff' : '#333333';
 
   return (
     <GaugeChart
-      id={`gauge-${speed}`} // ID único basado en la velocidad
-      nrOfLevels={20}
-      percent={speed / 100} // Escala de 0 a 100 Mbps
-      textColor={theme === 'dark' ? '#ffffff' : '#333333'} // Ajustar color del texto también
-      needleColor={needleColor} // Color dinámico de la aguja
-      colors={['#ff0000', '#ffff00', '#00ff00']}
-      arcWidth={0.3}
+      id={`gauge-${speed}`}
+      nrOfLevels={10}
+      arcWidth={0.4}
+      percent={speed / 100}
+      textColor={theme === 'dark' ? '#ffffff' : '#333333'}
+      needleColor={needleColor}
+      needleBaseColor={needleColor}
+      colors={['#2196f3', '#ffeb3b', '#4caf50']}
+      arcPadding={0.02}
+      cornerRadius={3}
+      style={{ width: '300px' }}
+      hideText={true} // Oculta cualquier texto interno del velocímetro
     />
   );
 };
