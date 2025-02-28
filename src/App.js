@@ -23,7 +23,7 @@ function App() {
     await response.blob();
     const end = performance.now();
     const tiempoSegundos = (end - start) / 1000;
-    const tamanoMB = 10;
+    const tamanoMB = 60;
     const velocidadMbps = (tamanoMB * 8) / tiempoSegundos;
     setDownloadSpeed(velocidadMbps.toFixed(2));
   };
