@@ -92,7 +92,7 @@ function App() {
         </div>
       </main>
       <footer>
-        <p>JDOL Software © 2025 | Desarrollado con asistencia de IA</p>
+        <p>JDOL Software © 2025 </p>
       </footer>
     </div>
   );
