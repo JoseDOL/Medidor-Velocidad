@@ -10,41 +10,74 @@ function App() {
   const [theme, setTheme] = useState('dark');
   const [testing, setTesting] = useState(false);
 
+  // Función auxiliar para medir latencia con múltiples intentos
   const medirLatencia = async () => {
-    const start = performance.now();
-    await fetch('https://backend-speed-test.onrender.com/speed/ping');
-    const end = performance.now();
-    setLatency(((end - start) / 2).toFixed(2));
+    const attempts = 3;
+    let totalLatency = 0;
+    for (let i = 0; i < attempts; i++) {
+      const start = performance.now();
+      try {
+        await fetch('https://backend-speed-test.onrender.com/speed/ping', {
+          signal: AbortSignal.timeout(5000), // Timeout de 5 segundos
+        });
+        const end = performance.now();
+        totalLatency += (end - start) / 2; // Ida y vuelta / 2
+      } catch (error) {
+        console.error('Error en latencia:', error);
+        totalLatency += 999; // Valor alto para fallo
+      }
+    }
+    setLatency((totalLatency / attempts).toFixed(2));
   };
 
+  // Función auxiliar para medir descarga con múltiples intentos
   const medirDescarga = async () => {
-    const start = performance.now();
-    const response = await fetch('https://backend-speed-test.onrender.com/speed/download');
-    await response.blob();
-    const end = performance.now();
-    const tiempoSegundos = (end - start) / 1000;
-    const tamanoMB = 60;
-    const velocidadMbps = (tamanoMB * 8) / tiempoSegundos;
-    setDownloadSpeed(velocidadMbps.toFixed(2));
+    const attempts = 3;
+    let totalSpeed = 0;
+    const fileSizeMB = 50; // Aumentado a 50 MB
+    for (let i = 0; i < attempts; i++) {
+      const start = performance.now();
+      try {
+        const response = await fetch('https://backend-speed-test.onrender.com/speed/download', {
+          signal: AbortSignal.timeout(10000), // Timeout de 10 segundos
+        });
+        await response.blob();
+        const end = performance.now();
+        const tiempoSegundos = (end - start) / 1000;
+        const velocidadMbps = (fileSizeMB * 8) / tiempoSegundos;
+        totalSpeed += velocidadMbps;
+      } catch (error) {
+        console.error('Error en descarga:', error);
+        totalSpeed += 0; // Ignorar intento fallido
+      }
+    }
+    setDownloadSpeed((totalSpeed / attempts).toFixed(2));
   };
 
+  // Función auxiliar para medir subida con múltiples intentos
   const medirSubida = async () => {
-    const start = performance.now();
-    const data = new Blob([new ArrayBuffer(1 * 1024 * 1024)]);
-    await fetch('https://backend-speed-test.onrender.com/speed/upload', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Content-Type': 'application/octet-stream',
-        'Connection': 'keep-alive', // Ayuda en algunos casos
-      },
-      // Forzar HTTP/1.1 si es necesario (esto depende del navegador y servidor)
-    });
-    const end = performance.now();
-    const tiempoSegundos = (end - start) / 1000;
-    const tamanoMB = 1;
-    const velocidadMbps = (tamanoMB * 8) / tiempoSegundos;
-    setUploadSpeed(velocidadMbps.toFixed(2));
+    const attempts = 3;
+    let totalSpeed = 0;
+    const fileSizeMB = 10; // Volvemos a 10 MB
+    for (let i = 0; i < attempts; i++) {
+      const start = performance.now();
+      const data = new Blob([new ArrayBuffer(fileSizeMB * 1024 * 1024)]);
+      try {
+        await fetch('https://backend-speed-test.onrender.com/speed/upload', {
+          method: 'POST',
+          body: data,
+          signal: AbortSignal.timeout(10000), // Timeout de 10 segundos
+        });
+        const end = performance.now();
+        const tiempoSegundos = (end - start) / 1000;
+        const velocidadMbps = (fileSizeMB * 8) / tiempoSegundos;
+        totalSpeed += velocidadMbps;
+      } catch (error) {
+        console.error('Error en subida:', error);
+        totalSpeed += 0; // Ignorar intento fallido
+      }
+    }
+    setUploadSpeed((totalSpeed / attempts).toFixed(2));
   };
 
   const iniciarPruebas = async () => {
@@ -92,7 +125,7 @@ function App() {
         </div>
       </main>
       <footer>
-        <p>JDOL Software © 2025 </p>
+        <p>JDOL Software © 2025</p>
       </footer>
     </div>
   );
