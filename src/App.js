@@ -10,7 +10,6 @@ function App() {
   const [theme, setTheme] = useState('dark');
   const [testing, setTesting] = useState(false);
 
-  // Función auxiliar para medir latencia con múltiples intentos
   const medirLatencia = async () => {
     const attempts = 3;
     let totalLatency = 0;
@@ -18,28 +17,27 @@ function App() {
       const start = performance.now();
       try {
         await fetch('https://backend-speed-test.onrender.com/speed/ping', {
-          signal: AbortSignal.timeout(5000), // Timeout de 5 segundos
+          signal: AbortSignal.timeout(5000),
         });
         const end = performance.now();
-        totalLatency += (end - start) / 2; // Ida y vuelta / 2
+        totalLatency += (end - start) / 2;
       } catch (error) {
         console.error('Error en latencia:', error);
-        totalLatency += 999; // Valor alto para fallo
+        totalLatency += 999;
       }
     }
     setLatency((totalLatency / attempts).toFixed(2));
   };
 
-  // Función auxiliar para medir descarga con múltiples intentos
   const medirDescarga = async () => {
     const attempts = 3;
     let totalSpeed = 0;
-    const fileSizeMB = 50; // Aumentado a 50 MB
+    const fileSizeMB = 50;
     for (let i = 0; i < attempts; i++) {
       const start = performance.now();
       try {
         const response = await fetch('https://backend-speed-test.onrender.com/speed/download', {
-          signal: AbortSignal.timeout(10000), // Timeout de 10 segundos
+          signal: AbortSignal.timeout(15000), // Aumentado a 15 segundos
         });
         await response.blob();
         const end = performance.now();
@@ -48,17 +46,16 @@ function App() {
         totalSpeed += velocidadMbps;
       } catch (error) {
         console.error('Error en descarga:', error);
-        totalSpeed += 0; // Ignorar intento fallido
+        totalSpeed += 0;
       }
     }
     setDownloadSpeed((totalSpeed / attempts).toFixed(2));
   };
 
-  // Función auxiliar para medir subida con múltiples intentos
   const medirSubida = async () => {
     const attempts = 3;
     let totalSpeed = 0;
-    const fileSizeMB = 10; // Volvemos a 10 MB
+    const fileSizeMB = 1; // Reducido a 1 MB
     for (let i = 0; i < attempts; i++) {
       const start = performance.now();
       const data = new Blob([new ArrayBuffer(fileSizeMB * 1024 * 1024)]);
@@ -66,7 +63,7 @@ function App() {
         await fetch('https://backend-speed-test.onrender.com/speed/upload', {
           method: 'POST',
           body: data,
-          signal: AbortSignal.timeout(10000), // Timeout de 10 segundos
+          signal: AbortSignal.timeout(15000), // Aumentado a 15 segundos
         });
         const end = performance.now();
         const tiempoSegundos = (end - start) / 1000;
@@ -74,7 +71,21 @@ function App() {
         totalSpeed += velocidadMbps;
       } catch (error) {
         console.error('Error en subida:', error);
-        totalSpeed += 0; // Ignorar intento fallido
+        // Reintento en caso de fallo
+        try {
+          const retryStart = performance.now();
+          await fetch('https://backend-speed-test.onrender.com/speed/upload', {
+            method: 'POST',
+            body: data,
+            signal: AbortSignal.timeout(15000),
+          });
+          const retryEnd = performance.now();
+          const retryTiempoSegundos = (retryEnd - retryStart) / 1000;
+          totalSpeed += (fileSizeMB * 8) / retryTiempoSegundos;
+        } catch (retryError) {
+          console.error('Reintento fallido en subida:', retryError);
+          totalSpeed += 0;
+        }
       }
     }
     setUploadSpeed((totalSpeed / attempts).toFixed(2));
@@ -125,7 +136,7 @@ function App() {
         </div>
       </main>
       <footer>
-        <p>JDOL Software © 2025</p>
+        <p>JDOL Software © 2025 </p>
       </footer>
     </div>
   );
