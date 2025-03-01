@@ -1,177 +1,223 @@
-/* Resetear márgenes y definir altura completa para html y body */
+/* Resetear márgenes y definir altura completa */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Variables de color para los temas */
+:root {
+  --dark-bg: #1a1a1a;
+  --dark-text: #ffffff;
+  --light-bg: #ffffff;
+  --light-text: #333333;
+}
+
+/* Contenedor principal */
+.app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tema oscuro */
+.app.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.app.dark .theme-toggle {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+/* Tema claro */
+.app.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+.app.light .theme-toggle {
+  background-color: #555555;
+  border: 1px solid #333333;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* Escala entre 1.5rem y 2.5rem según pantalla */
+  text-align: center;
+}
+
+/* Botón de tema */
+.theme-toggle {
+  position: absolute;
+  right: 1rem;
+  width: clamp(30px, 5vw, 36px); /* Escala entre 30px y 36px */
+  height: clamp(30px, 5vw, 36px);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+
+/* Main */
+main {
+  text-align: center;
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón de iniciar */
+.start-button {
+  width: clamp(80px, 20vw, 120px); /* Escala entre 80px y 120px */
+  height: clamp(80px, 20vw, 120px);
+  border-radius: 50%;
+  background-color: #81c784;
+  border: 3px solid #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(14px, 3vw, 16px); /* Escala entre 14px y 16px */
+  font-weight: bold;
+  text-align: center;
+  animation: pulse 1.5s infinite;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 1rem; /* Espacio debajo para pantallas pequeñas */
+}
+
+.start-button.testing {
+  background-color: #e57373;
+  border: 3px solid #e57373;
+  animation: none;
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
   }
-  
-  /* Variables de color para los temas */
-  :root {
-    --dark-bg: #1a1a1a;
-    --dark-text: #ffffff;
-    --light-bg: #ffffff;
-    --light-text: #333333;
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
   }
-  
-  /* Aplicar el tema a toda la pantalla */
-  .app {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
-  
-  /* Tema oscuro */
-  .app.dark {
-    background-color: var(--dark-bg);
-    color: var(--dark-text);
-  }
-  
-  .app.dark .theme-toggle {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-  }
-  
-  /* Tema claro */
-  .app.light {
-    background-color: var(--light-bg);
-    color: var(--light-text);
-  }
-  
-  .app.light .theme-toggle {
-    background-color: #555555;
-    border: 1px solid #333333;
-  }
-  
-  /* Estilos para el header */
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-  }
-  
-  /* Centrar el título */
-  header h1 {
-    margin: 0;
-    flex-grow: 1;
-    text-align: center;
-  }
-  
-  /* Posicionar y estilizar el botón de tema */
-  .theme-toggle {
-    position: absolute;
-    right: 20px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
-  }
-  
-  /* Animación al hacer clic en el botón de tema */
-  .theme-toggle:active {
-    transform: scale(0.9);
-  }
-  
-  /* Estilos para el main */
-  main {
-    text-align: center;
-    padding: 20px;
-    flex-grow: 1;
-  }
-  
-  /* Estilos para el botón de iniciar prueba */
-  .start-button {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #81c784;
-    border: 3px solid #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    animation: pulse 1.5s infinite;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  
-  /* Estado cuando está ejecutando la prueba */
-  .start-button.testing {
-    background-color: #e57373;
-    border: 3px solid #e57373;
-    animation: none;
-    cursor: not-allowed;
-  }
-  
-  /* Animación de parpadeo */
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
-    }
-  }
-  
-  /* Deshabilitado (redundante aquí, pero mantenido por compatibilidad) */
-  .start-button:disabled {
-    background-color: #e57373;
-    border: 3px solid #e57373;
-    cursor: not-allowed;
-  }
-  
-  /* Estilos para los resultados */
-  .results {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  /* Contenedor para los velocímetros */
+}
+
+.start-button:disabled {
+  background-color: #e57373;
+  border: 3px solid #e57373;
+  cursor: not-allowed;
+}
+
+/* Resultados */
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Contenedor de velocímetros */
+.speed-meters {
+  display: flex;
+  flex-direction: row; /* Por defecto en fila */
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 5vw, 40px); /* Escala entre 20px y 40px */
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Cada velocímetro */
+.speed-meters div {
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+.speed-meters div h3 {
+  font-size: clamp(1rem, 3vw, 1.5rem); /* Escala entre 1rem y 1.5rem */
+  margin: 0.5rem 0;
+}
+
+.speed-meters div p {
+  margin-top: 0.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Escala entre 0.9rem y 1.2rem */
+}
+
+/* Latencia */
+.latency {
+  margin-top: 1rem;
+}
+
+.latency h3 {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  margin: 0.5rem 0;
+}
+
+.latency p {
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: clamp(0.7rem, 2vw, 0.9rem); /* Escala entre 0.7rem y 0.9rem */
+  border-top: 1px solid #555;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
   .speed-meters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    width: 100%;
-    max-width: 1000px;
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    gap: 1rem;
   }
-  
-  /* Estilos para cada velocímetro */
-  .speed-meters div {
-    flex: 0 1 auto;
-    text-align: center;
+
+  .start-button {
+    margin-bottom: 2rem; /* Más espacio en móviles */
   }
-  
-  /* Estilos para los valores debajo de los velocímetros */
-  .speed-meters div p {
-    margin-top: 10px;
-    font-size: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem;
   }
-  
-  /* Estilos para la latencia */
-  .latency {
-    margin-top: 20px;
+
+  header h1 {
+    font-size: clamp(1.2rem, 5vw, 2rem); /* Ajuste para pantallas muy pequeñas */
   }
-  
-  /* Estilos para el footer */
-  footer {
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9rem;
-    border-top: 1px solid #555;
+
+  .theme-toggle {
+    right: 0.5rem;
   }
+
+  .start-button {
+    width: clamp(60px, 20vw, 100px); /* Más pequeño en móviles */
+    height: clamp(60px, 20vw, 100px);
+  }
+}
